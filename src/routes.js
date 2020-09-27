@@ -41,6 +41,8 @@ const User = React.lazy(() => import('./views/users/User'));
 const LocationView = React.lazy(() => import('./views/inv/location/ViewLocations'));
 const LocationUpdate = React.lazy(() => import('./views/inv/location/UpdateLocation'));
 const LocationAdd = React.lazy(() => import('./views/inv/location/AddLocation'));
+const LocationStatus = React.lazy(() => import('./views/inv/location/ChangeLocationStatus'));
+
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -48,6 +50,7 @@ const routes = [
   { path: '/location/view', name: 'View', component: LocationView },
   { path: '/location/update', name: 'Update', component: LocationUpdate },
   { path: '/location/add', name: 'Add', component: LocationAdd },
+  { path: '/location/status', name: 'Status', component: LocationStatus },
   
   
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },

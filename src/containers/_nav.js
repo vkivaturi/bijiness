@@ -50,20 +50,25 @@ export default [
     _children: [
       {
         _tag: 'CSidebarNavItem',
-        name: 'View locations',
-        to: '/location/view',
+        name: 'Add location',
+        to: '/location/add',
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Update / delete',
+        name: 'Change status',
+        to: '/location/status',
+      },
+
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Update details',
         to: '/location/update',
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Add location',
-        to: '/location/add',
+        name: 'View locations',
+        to: '/location/view',
       },
-
     ],
   },
   
