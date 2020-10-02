@@ -30,10 +30,39 @@ export default [
     _children: ['Inventory management']
   },
   {
-    _tag: 'CSidebarNavItem',
+    _tag: 'CSidebarNavDropdown',
     name: 'Inventory',
-    to: '/theme/typography',
-    icon: 'cil-pencil',
+    icon: 'cil-puzzle',
+    route: '/inventory',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Add item',
+        to: '/inventory/additem',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Add item SKU',
+        to: '/inventory/addsku',
+      },
+
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Update item',
+        to: '/inventory/updateitem',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Update item SKU',
+        to: '/inventory/updatesku',
+      },
+
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'View items & SKUs',
+        to: '/inventory/viewitem',
+      },
+    ],
   },
   {
     _tag: 'CSidebarNavItem',
@@ -51,23 +80,23 @@ export default [
       {
         _tag: 'CSidebarNavItem',
         name: 'Add location',
-        to: '/location/add',
+        to: '/location/addlocation',
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Change status',
-        to: '/location/status',
+        to: '/location/statuslocation',
       },
 
       {
         _tag: 'CSidebarNavItem',
         name: 'Update details',
-        to: '/location/update',
+        to: '/location/updatelocation',
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'View locations',
-        to: '/location/view',
+        to: '/location/viewlocation',
       },
     ],
   },

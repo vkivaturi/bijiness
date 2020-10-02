@@ -43,15 +43,26 @@ const LocationUpdate = React.lazy(() => import('./views/inv/location/UpdateLocat
 const LocationAdd = React.lazy(() => import('./views/inv/location/AddLocation'));
 const LocationStatus = React.lazy(() => import('./views/inv/location/ChangeLocationStatus'));
 
+const ItemAdd = React.lazy(() => import('./views/inv/inventory/AddItem'));
+const ItemSKUAdd = React.lazy(() => import('./views/inv/location/ChangeLocationStatus'));
+const ItemUpdate = React.lazy(() => import('./views/inv/location/ChangeLocationStatus'));
+const ItemSKUUpdate = React.lazy(() => import('./views/inv/location/ChangeLocationStatus'));
+const ItemView = React.lazy(() => import('./views/inv/location/ChangeLocationStatus'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   
-  { path: '/location/view', name: 'View', component: LocationView },
-  { path: '/location/update', name: 'Update', component: LocationUpdate },
-  { path: '/location/add', name: 'Add', component: LocationAdd },
-  { path: '/location/status', name: 'Status', component: LocationStatus },
+  { path: '/inventory/additem', name: 'Add item', component: ItemAdd },
+  { path: '/inventory/addsku', name: 'Add item SKU', component: ItemSKUAdd },
+  { path: '/inventory/updateitem', name: 'Update item', component: ItemUpdate },
+  { path: '/inventory/updatesku', name: 'Update item SKU', component: ItemSKUUpdate },
+  { path: '/inventory/viewitem', name: 'View items', component: ItemView },
+
   
+  { path: '/location/viewlocation', name: 'View', component: LocationView },
+  { path: '/location/updatelocation', name: 'Update', component: LocationUpdate },
+  { path: '/location/addlocation', name: 'Add', component: LocationAdd },
+  { path: '/location/statuslocation', name: 'Status', component: LocationStatus },
   
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
