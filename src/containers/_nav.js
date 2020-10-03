@@ -59,9 +59,16 @@ export default [
 
       {
         _tag: 'CSidebarNavItem',
-        name: 'View items & SKUs',
+        name: 'View items',
         to: '/inventory/viewitem',
       },
+
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'View item SKUs',
+        to: '/inventory/viewitemsku',
+      },
+
     ],
   },
   {
