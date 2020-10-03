@@ -44,7 +44,7 @@ const LocationAdd = React.lazy(() => import('./views/inv/location/AddLocation'))
 const LocationStatus = React.lazy(() => import('./views/inv/location/ChangeLocationStatus'));
 
 const ItemAdd = React.lazy(() => import('./views/inv/inventory/AddItem'));
-const ItemSKUAdd = React.lazy(() => import('./views/inv/location/ChangeLocationStatus'));
+const ItemSKUAdd = React.lazy(() => import('./views/inv/inventory/AddItemSKU'));
 const ItemUpdate = React.lazy(() => import('./views/inv/location/ChangeLocationStatus'));
 const ItemSKUUpdate = React.lazy(() => import('./views/inv/location/ChangeLocationStatus'));
 const ItemView = React.lazy(() => import('./views/inv/location/ChangeLocationStatus'));
