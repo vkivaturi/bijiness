@@ -50,6 +50,7 @@ const ItemSKUUpdate = React.lazy(() => import('./views/inv/inventory/UpdateItemS
 const ItemView = React.lazy(() => import('./views/inv/inventory/ViewItems'));
 const ItemSKUView = React.lazy(() => import('./views/inv/inventory/ViewItemSKUs'));
 
+const ItemScan = React.lazy(() => import('./views/inv/operations/ScanItem'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -66,7 +67,9 @@ const routes = [
   { path: '/location/updatelocation', name: 'Update', component: LocationUpdate },
   { path: '/location/addlocation', name: 'Add', component: LocationAdd },
   { path: '/location/statuslocation', name: 'Status', component: LocationStatus },
-  
+
+  { path: '/operations/scanitem', name: 'Scan item', component: ItemScan },
+
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

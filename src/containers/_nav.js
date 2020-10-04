@@ -71,11 +71,19 @@ export default [
 
     ],
   },
+
   {
-    _tag: 'CSidebarNavItem',
-    name: 'Items',
-    to: '/theme/typography',
-    icon: 'cil-pencil',
+    _tag: 'CSidebarNavDropdown',
+    name: 'Operations',
+    icon: 'cil-puzzle',
+    route: '/operations',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Scan item',
+        to: '/operations/scanitem',
+      },
+    ],
   },
   
   {
