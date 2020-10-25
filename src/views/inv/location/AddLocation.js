@@ -6,39 +6,81 @@ import {
   CCardFooter,
   CCardHeader,
   CCol,
-  CCollapse,
-  CDropdownItem,
-  CDropdownMenu,
-  CDropdownToggle,
-  CFade,
   CForm,
   CFormGroup,
   CFormText,
-  CValidFeedback,
-  CInvalidFeedback,
   CTextarea,
   CInput,
-  CInputFile,
-  CInputCheckbox,
-  CInputRadio,
-  CInputGroup,
-  CInputGroupAppend,
-  CInputGroupPrepend,
-  CDropdown,
-  CInputGroupText,
   CLabel,
   CSelect,
   CRow
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
-const AddLocation = () => {
-  const [collapsed, setCollapsed] = React.useState(true)
-  const [showElements, setShowElements] = React.useState(true)
+const servelURL = "http://localhost:8080/";
 
-  return (
-    <>
 
+class AddLocation extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      locationCode: '',
+      locationStatus: "New",
+      addressLine1: '',
+      addressLine2: '',
+      addressLine3: '',
+      locality: '',
+      city: '',
+      district: '',
+      state: '',
+      postalCode: '',
+      notes: '',
+      locationType: '1'
+    };
+  }
+
+  //Set value to respecctive field when there is a change
+  handleChange = (event) => {
+    let name = event.target.name;
+    let val = event.target.value;
+    this.setState({ [name]: val });
+  }
+
+  //Call backend API to add a new location
+  handleSubmit = (event) => {
+
+    var postData = {
+      locationCode: this.state.locationCode,
+      locationStatus: this.state.locationStatus,
+      addressLine1: this.state.addressLine1,
+      addressLine2: this.state.addressLine2,
+      addressLine3: this.state.addressLine3,
+      locality: this.state.locality,
+      city: this.state.city,
+      district: this.state.district,
+      state: this.state.state,
+      postalCode: this.state.postalCode,
+      notes: this.state.notes,
+      locationType: this.state.locationType
+
+    };
+
+    fetch(servelURL + 'locations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(postData)
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      //ChromeSamples.log('Created Gist:', data.html_url);
+    });
+  }
+
+  render() {
+    return (
       <CRow>
         <CCol>
           <CCard>
@@ -46,140 +88,15 @@ const AddLocation = () => {
               Add New Location
             </CCardHeader>
             <CCardBody>
-              <CForm action="" method="post" encType="multipart/form-data" className="form-horizontal">
+              <CForm>
                 <CFormGroup row>
-                  <CCol md="3">
+                  <CCol>
                     <CLabel>Location Code</CLabel>
+                    <CInput name="locationCode" placeholder="Ex BLR-HSR-01. Max 15 characters" onChange={this.handleChange} />
                   </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput id="text-location-code" name="text-input" placeholder="Enter location code" />
-                    <CFormText>Please keep location code format consistent. Ex BLR-HSR-01. Size limit is 15 characters</CFormText>
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel>Location Name</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput id="text-location-name" name="text-input" placeholder="Enter location name" />
-                    <CFormText>Max 50 characters</CFormText>
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel htmlFor="disabled-input">Location status</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput id="location-status" name="disabled-input" placeholder="New" disabled />
-                    <CFormText>Please use "Location status change" feature to activate this location </CFormText>
-                  </CCol>
-                </CFormGroup>
-
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel>Address line 1</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput id="text-addr-line-1" name="text-input" placeholder="Enter address line 1" />
-                    <CFormText>Max 50 characters</CFormText>
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel>Address line 2</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput id="text-addr-line-2" name="text-input" placeholder="Enter address line 2" />
-                    <CFormText>Max 50 characters</CFormText>
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel>Address line 3</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput id="text-addr-line-3" name="text-input" placeholder="Enter address line 3" />
-                    <CFormText>Max 50 characters</CFormText>
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel>Locality</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput id="text-locality" name="text-input" placeholder="Enter locality name" />
-                    <CFormText>Max 50 characters</CFormText>
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel>City / town</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput id="text-city" name="text-input" placeholder="Enter city / town / village name" />
-                    <CFormText>Max 50 characters</CFormText>
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel>District</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput id="text-district" name="text-input" placeholder="Enter district name" />
-                    <CFormText>Max 50 characters</CFormText>
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel>State</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput id="text-state" name="text-input" placeholder="Enter state name" />
-                    <CFormText>Max 50 characters</CFormText>
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel>Pin code</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput id="text-postal-code" name="text-input" placeholder="Enter postal code" />
-                    <CFormText>Eactly 6 digit number</CFormText>
-                  </CCol>
-                </CFormGroup>
-
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel>Phone number</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput id="text-phone-number" name="text-input" placeholder="Enter contact phone number" />
-                    <CFormText>Eactly 10 digit number</CFormText>
-                  </CCol>
-                </CFormGroup>
-
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel htmlFor="textarea-notes">Notes</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CTextarea 
-                      name="textarea-notes" 
-                      id="textarea-notes" 
-                      rows="3"
-                      placeholder="Additional notes for the location..." 
-                    />
-                    <CFormText>Max 100 characters</CFormText>
-                  </CCol>
-                </CFormGroup>
-
-                <CFormGroup row>
-                  <CCol md="3">
+                  <CCol>
                     <CLabel htmlFor="select-type">Location type</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CSelect custom name="select-type" id="select-type">
-                      <option value="0">Please select location type</option>
+                    <CSelect custom name="locationType" onChange={this.handleChange}>
                       <option value="1">Distribution center</option>
                       <option value="2">Head office,</option>
                       <option value="3">Regional office</option>
@@ -188,37 +105,75 @@ const AddLocation = () => {
                     </CSelect>
                   </CCol>
                 </CFormGroup>
+
                 <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel>Lattitude</CLabel>
+                  <CCol>
+                    <CLabel>Address line 1</CLabel>
+                    <CInput name="addressLine1" placeholder="Max 50 characters" onChange={this.handleChange} />
                   </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput id="text-lattitude" name="text-input" placeholder="Enter location lattitude" />
-                    <CFormText>Max 50 characters</CFormText>
+                  <CCol>
+                    <CLabel>Address line 2</CLabel>
+                    <CInput name="addressLine2" placeholder="Max 50 characters" onChange={this.handleChange} />
+                  </CCol>
+                  <CCol>
+                    <CLabel>Address line 3</CLabel>
+                    <CInput name="addressLine3" placeholder="Max 50 characters" onChange={this.handleChange} />
+                  </CCol>
+                </CFormGroup>
+                <CFormGroup row>
+                  <CCol>
+                    <CLabel>Locality</CLabel>
+                    <CInput name="locality" placeholder="Max 50 characters" onChange={this.handleChange} />
+                  </CCol>
+                  <CCol>
+                    <CLabel>City / town</CLabel>
+                    <CInput name="city" placeholder="Max 50 characters" onChange={this.handleChange} />
+                  </CCol>
+                  <CCol>
+                    <CLabel>District</CLabel>
+                    <CInput name="district" placeholder="Max 50 characters" onChange={this.handleChange} />
+                  </CCol>
+                </CFormGroup>
+
+                <CFormGroup row>
+                  <CCol>
+                    <CLabel>State</CLabel>
+                    <CInput name="state" placeholder="Max 50 characters" onChange={this.handleChange} />
+                  </CCol>
+                  <CCol>
+                    <CLabel>Pin code</CLabel>
+                    <CInput name="postalCode" placeholder="6 digits" onChange={this.handleChange} />
+                  </CCol>
+                  <CCol>
+                    <CLabel>Phone number</CLabel>
+                    <CInput name="phoneNumber" placeholder="10 digits" onChange={this.handleChange} />
                   </CCol>
                 </CFormGroup>
 
                 <CFormGroup row>
                   <CCol md="3">
-                    <CLabel>Longitude</CLabel>
+                    <CLabel htmlFor="textarea-notes">Notes</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CInput id="text-longitude" name="text-input" placeholder="Enter location longitudee" />
-                    <CFormText>Max 50 characters</CFormText>
+                    <CTextarea
+                      name="notes"
+                      rows="3"
+                      placeholder="Max 100 characters"
+                      onChange={this.handleChange}
+                    />
                   </CCol>
                 </CFormGroup>
-
               </CForm>
             </CCardBody>
             <CCardFooter>
-              <CButton type="submit" size="sm" color="primary"><CIcon name="cil-scrubber" /> Create location</CButton>
-              <CButton type="reset" size="sm" color="danger"><CIcon name="cil-ban" /> Reset data</CButton>
+              <CButton onClick={this.handleSubmit} size="md" color="primary"><CIcon name="cil-scrubber" /> Create location</CButton>
+              <CButton type="reset" size="md" color="danger"><CIcon name="cil-ban" /> Reset data</CButton>
             </CCardFooter>
           </CCard>
         </CCol>
       </CRow>
-    </>
-  )
+    )
+  }
 }
 
 export default AddLocation
